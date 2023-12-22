@@ -1,1 +1,1 @@
-export const ENDPOINT = {};
+export const ENDPOINTS = {}
