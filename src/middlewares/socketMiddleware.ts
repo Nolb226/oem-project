@@ -20,6 +20,7 @@ const socketMiddleware: Middleware = (store) => {
     let socket: ISocket
 
     return (next) => (action) => {
+        
         if (initSocket.match(action)) {
             if (!socket && typeof window !== 'undefined') {
                 socket = SocketFactory.create()
