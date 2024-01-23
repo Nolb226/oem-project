@@ -1,5 +1,5 @@
-import { AppDispatch, RootState } from '@/redux';
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '@/redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 /**
  * A custom React hook for conveniently accessing Redux's dispatch and selector methods.
@@ -9,8 +9,8 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
  * @property {function} appSelector - A Redux selector function for accessing the Redux store's state.
  */
 export default function useRedux() {
-	const dispatch = useDispatch<AppDispatch>();
-	const appSelector: TypedUseSelectorHook<RootState> = useSelector;
+    const dispatch = useDispatch<AppDispatch>()
+    const appSelector: TypedUseSelectorHook<RootState> = useSelector
 
-	return { dispatch, appSelector };
+    return { dispatch, appSelector }
 }
