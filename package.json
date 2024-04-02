@@ -1,6 +1,7 @@
 {
     "name": "oem-project",
     "version": "0.1.0",
+    "homepage": "./",
     "private": true,
     "dependencies": {
         "@hookform/resolvers": "^3.3.2",
