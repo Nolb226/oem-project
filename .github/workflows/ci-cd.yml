@@ -31,11 +31,13 @@ jobs:
 
             - name: 'Build'
               env:
-                  API_URL: https://github.com/
+                  CI:false API_URL: https://github.com/
               run: |
                   echo REACT_APP_API_URL=${API_URL} >> .env
                   npm run build
+
             - name: 'FTP is Running'
+
               uses: SamKirkland/FTP-Deploy-Action@v4.3.4
               with:
                   server: ${{ secrets.GIT_CPANEL_REACT_SERVER }}
