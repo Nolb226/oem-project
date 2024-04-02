@@ -1,4 +1,6 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
+import { login } from '../auth'
+import { RoomAction } from './actions.type'
 
 export type SocketState = {
     isConnected: boolean
@@ -9,8 +11,6 @@ const initialState: SocketState = {
     isConnected: false,
     rooms: [],
 }
-
-type RoomAction = PayloadAction<{ rooms: string }>
 
 const socketSlice = createSlice({
     name: '@@socket',

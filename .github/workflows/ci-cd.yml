@@ -1,38 +1,45 @@
-
 name: CI-CD Deployment
 
 on:
-  push:
-    branches: [ "master","dev"]
+    push:
+        branches: ['master', 'dev']
 
 jobs:
-  gitleaks-tracking: 
-    name: Gitleaks
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2.3.2
+    gitleaks-tracking:
+        name: Gitleaks
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                  fetch-depth: 0
+            - uses: gitleaks/gitleaks-action@v2.3.2
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-        cache: 'npm'
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: '16'
+                  cache: 'npm'
 
-    - name: 'Install Dependencies'
-      run: npm ci
+            - name: 'Install Dependencies'
+              run: npm ci
 
-    - name: 'Testing'
-      run: npm test
+            - name: 'Testing'
+              run: npm test
 
-    - name: 'Build'
-      env:
-        API_URL: https://github.com/
-      run: |
-        echo REACT_APP_API_URL=${API_URL} >> .env
-        npm run build
+            - name: 'Build'
+              env:
+                  API_URL: https://github.com/
+              run: |
+                  echo REACT_APP_API_URL=${API_URL} >> .env
+                  npm run build
+            - name: 'FTP is Running'
+              uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+              with:
+                  server: ${{ secrets.GIT_CPANEL_REACT_SERVER }}
+                  username: ${{ secrets.GIT_CPANEL_REACT_USER }}
+                  password: ${{ secrets.GIT_CPANEL_REACT_PWD }}
+                  protocol: ${{ secrets.GIT_CPANEL_REACT_PROTOCOL }}
+                  local-dir: ./build/

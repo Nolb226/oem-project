@@ -7,7 +7,7 @@ export interface ISocket {
 class SocketConnection implements ISocket {
     public socket: Socket
     public socketEndPoint: string =
-        process.env.WEBSOCKET_URL || 'localhost:8080'
+        process.env.REACT_APP_WEBSOCKET_URL || 'localhost:8080'
 
     constructor() {
         this.socket = io(this.socketEndPoint)

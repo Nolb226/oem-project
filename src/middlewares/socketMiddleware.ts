@@ -1,3 +1,4 @@
+import { login } from '@/redux/auth'
 import {
     connectionEstablished,
     connectionLost,
@@ -20,7 +21,6 @@ const socketMiddleware: Middleware = (store) => {
     let socket: ISocket
 
     return (next) => (action) => {
-        
         if (initSocket.match(action)) {
             if (!socket && typeof window !== 'undefined') {
                 socket = SocketFactory.create()
@@ -38,6 +38,7 @@ const socketMiddleware: Middleware = (store) => {
             let room = action.payload.rooms
             socket.socket.emit(SocketEvent.JoinRoom, room)
         }
+        next(action)
     }
 }
 
