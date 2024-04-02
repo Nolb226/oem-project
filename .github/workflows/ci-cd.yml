@@ -31,10 +31,8 @@ jobs:
 
             - name: 'Build'
               env:
-                  CI:false API_URL: https://github.com/
-              run: |
-                  echo REACT_APP_API_URL=${API_URL} >> .env
-                  npm run build
+                  CI: false
+              run: npm run build
 
             - name: 'FTP is Running'
 
